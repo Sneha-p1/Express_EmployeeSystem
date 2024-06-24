@@ -10,22 +10,46 @@
     <div class="text-center mt-20">
         <h1 class="text-3xl font-bold text-gray-800 mb-4">Employee Details</h1>
     <table class="m-auto w-72 h-40 bg-gray-300">
+        <thead>
             <tr>
-                <th>Employee ID : </th> 
-                <td>ID</td><br> 
+                <th class="border-2  px-4 py-2">Employee ID : </th> 
+                <th class="border-2  px-4 py-2">Employee Name : </th> 
+                <th class="border-2  px-4 py-2">Employee Role : </th> 
+                
             </tr>
+        </thead>
+        <tbody id="printdetails">
 
-            <tr>
-                <th>Employee Name : </th> 
-                <td>name</td><br> 
-            </tr>
-
-            <tr>
-                <th>Employee Role : </th> 
-                <td>roll</td><br> 
-            </tr>
+        </tbody>
    </table>
-   <button class="w-20 h-10 bg-black hover:bg-gray-600 text-white rounded-lg mt-10">Home</button>
+   <a href="/"> <button class="w-20 h-10 bg-black hover:bg-gray-600 text-white rounded-lg mt-10">Home</button></a>
     </div>
+
+    <script>
+        async function emplDetails(){
+            try{
+                const response = await fetch('/view/data');
+                const EmployeeDet = await response.json();
+                const emptable= document.getElementById('printdetails')
+                emptable.innerHTML = '';
+                EmployeeDet.forEach(element => {
+                    emptable.innerHTML +=
+
+                 `   <tr>
+                           <td>${element.empID}</td>
+                           <td>${element.empName}</td>
+                           <td>${element.empRole}</td>
+                     </tr> ` ;
+                });
+            }
+            catch(error){
+                console.error('Error');
+
+            }
+
+        }
+ 
+        document.addEventListener('DOMContentLoaded',emplDetails);
+    </script>
 </body>
 </html>

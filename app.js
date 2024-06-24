@@ -27,11 +27,24 @@ app.get('/Details', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'EmpDetails.html'))
 })
 
+
 app.get('/viewDetails', (req, res) => {
     res.send(employeeDetails)
 })
 
+app.post('/add',(req,res) =>{
+    var {empID,empName,empRole}=req.body;
+    empID=parseInt(empID)
+    const newlist={empID,empName,empRole}
+    employeeDetails.push(newlist)
+    console.log(employeeDetails);
+    res.redirect('/Details');
 
+})
+app.get('/view/data',(req,res) =>{
+    res.json(employeeDetails);
+    console.log("ghsd")
+})
 
 
 

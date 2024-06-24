@@ -9,11 +9,20 @@
 <body>
     <div class="text-center mt-28">
        <h1 class="text-3xl font-bold text-gray-800 mb-6">Employee List</h1>
-       <input type="search" class="border-2 h-10 rounded-lg mt-7 p-3" placeholder="Employee ID">
-       <input type="button" value="Details" class="w-20 h-10 bg-blue-700 hover:bg-blue-500 text-white rounded-lg mt-10"><br>
-       <button class="w-32 h-10 bg-black hover:bg-gray-600 text-white rounded-lg mt-10">Add Employee</button>
+       <input type="search" id="id" class="border-2 h-10 rounded-lg mt-7 p-3" placeholder="Employee ID">
+       <button onclick="search()" class="w-20 h-10 bg-blue-700 hover:bg-blue-500 text-white rounded-lg mt-10">Details</button><br>
+       <a href="/add"> <button class="w-32 h-10 bg-black hover:bg-gray-600 text-white rounded-lg mt-10">Add Employee</button></a>
                 
     </div>
+
+    <script>
+        function search(){
+            const id=document.getElementById("id").value
+            const url=`/search/${id}`;
+            console.log(url);
+            window.location.href=url;
+        }
+    </script>
     
 </body>
 </html>
