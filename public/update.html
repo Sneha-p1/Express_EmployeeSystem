@@ -9,14 +9,34 @@
 <body>
     <div class="text-center mt-20">
         <h1 class="text-3xl font-bold text-gray-800 mb-4">Employee Update</h1>
-        <form action="">
-            <input type="text" class="border-2 h-10 rounded-lg mt-7 p-3" placeholder="Employee ID"><br>
-            <input type="text" class="border-2 h-10 rounded-lg mt-7 p-3" placeholder="Employee Name"><br>
-            <input type="text" class="border-2 h-10 rounded-lg mt-7 p-3" placeholder="Roll"><br>
+        <form id="update" method="POST">
+            <input type="text" id="empID" name="empID" class="border-2 h-10 rounded-lg mt-7 p-3" placeholder="Employee ID"><br>
+            <input type="text" id="empName" name="empName" class="border-2 h-10 rounded-lg mt-7 p-3" placeholder="Employee Name"><br>
+            <input type="text" id="empRole" name="empRole" class="border-2 h-10 rounded-lg mt-7 p-3" placeholder="Roll"><br>
             <button  class="w-32 h-10 bg-black hover:bg-gray-600 text-white rounded-lg mt-10">Update</button>
-            <input type="button" value="Home" class="w-20 h-10 bg-black hover:bg-gray-600 text-white rounded-lg mt-10">
+            
         </form>
+        <a href="/"><button class="w-20 h-10 bg-black hover:bg-gray-600 text-white rounded-lg mt-10">Home</button></a>
     
     </div>
+
+    <script>
+        async function Update(){
+            const url=window.location.href;
+            const id=window.location.pathname.split('/').pop();
+
+            
+            try{
+                document.getElementById("update").action=`/update/data/${id}`;
+
+        }
+
+        catch(error){
+            console.log("error");
+        }
+    }
+    document.addEventListener('DOMContentLoaded', Update);
+
+    </script>
 </body>
 </html>

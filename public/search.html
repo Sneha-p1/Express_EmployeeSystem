@@ -1,13 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body>
-    Employee ID : <span id="empid"></span>
-    Employee Name : <span id="empname"></span>
-    Employee Role : <span id="emprole"></span>
+    <div class="text-center mt-24">
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">Employee Details</h1>
+        Employee ID : <span id="empid"></span><br>
+        Employee Name : <span id="empname"></span><br>
+        Employee Role : <span id="emprole"></span><br>
+
+        <button onclick="Update()" class="w-20 h-10 bg-black hover:bg-gray-600 text-white rounded-lg mt-10">Update</button>
+    <form id="delete" method="POST">
+        <button onclick="Delete()" class="w-20 h-10 bg-black hover:bg-gray-600 text-white rounded-lg mt-10">Delete</button>
+    </form>
+        <a href="/"><button class="w-20 h-10 bg-black hover:bg-gray-600 text-white rounded-lg mt-10">Home</button></a>
+
+    </div>
+
+    <script>
+        function Update() {
+            const id = window.location.pathname.split('/').pop();
+
+            const url = `/update/${id}`;
+
+            console.log(url);
+            window.location.href = url;
+        }
+
+
+        function Delete() {
+
+            const id = window.location.pathname.split('/').pop();
+
+            document.getElementById('delete').action = `/delete/${id}`;
+        }
+
+        async function getdata() {
+
+            const url = window.location.href;
+            const id = window.location.pathname.split('/').pop();
+
+            const ul = `search/data/${id}`;
+            try {
+
+                const response = await fetch(`/search/data/${id}`);
+                const data = await response.json();
+
+
+                document.getElementById("empid").innerHTML = data.empID;
+                document.getElementById("empname").innerHTML = data.empName;
+                document.getElementById("emprole").innerHTML = data.empRole;
+            }
+
+            catch (error) {
+                console.log("error");
+                document.getElementById("empID").innerHTML = "no id found";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', getdata);
+
+    </script>
 </body>
+
 </html>
